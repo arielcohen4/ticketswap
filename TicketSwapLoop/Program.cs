@@ -33,9 +33,9 @@ namespace TicketSwapLoop
 
                     request.AutomaticDecompression = DecompressionMethods.GZip;
                     request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
-                    //IWebProxy proxy = new WebProxy("45.83.184.12", 21287);
-                    //string proxyUsername = @"morroma11102";
-                    //string proxyPassword = @"r7rvptogqp";
+                    //IWebProxy proxy = new WebProxy("", 21287);
+                    //string proxyUsername = @"";
+                    //string proxyPassword = @"";
                     //proxy.Credentials = new NetworkCredential(proxyUsername, proxyPassword);
                     //request.Proxy = proxy;
                     request.Timeout = 5000;
@@ -59,7 +59,7 @@ namespace TicketSwapLoop
                             string link = dic["$" + item.Key + ".uri"]["path"].ToString();
                             Console.WriteLine("https://www.ticketswap.com/" + link);
 
-                            var Client = new PushbulletClient("o.csiq6uFbgIejWZxujhIim6gqhZVshD5q");
+                            var Client = new PushbulletClient("PUSHBULLET_ID");
                             string body = "https://www.ticketswap.com/" + link;
 
 
@@ -85,7 +85,7 @@ namespace TicketSwapLoop
         {
             var request = (HttpWebRequest)WebRequest.Create("https://api.ticketswap.com/graphql/public/batch");
             request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
-            request.Headers.Add("Authorization", "Bearer ODk0MThiN2RhNzA0Mzk3ZmU1ZmY3ZmY0ZWYxYjYwOTQ1YTlhOTVlZDExNjg2NjUzYmIwY2U1ZWY1YzU1NzI2Nw");
+            request.Headers.Add("Authorization", "Bearer YOUR_TICKETSWAP_BEARER");
 
             var postData = "[{\"operationName\":\"addTicketsToCart\",\"variables\":{\"input\":{\"listingId\":\"TGlzdGluZzo0MDAyNDUx\",\"listingHash\":\"6a097f2099\",\"amountOfTickets\":1}},\"query\":\"mutation addTicketsToCart($input: AddTicketsToCartInput!) {\n addTicketsToCart(input: $input) {\n cart {\n id\n __typename\n    }\n errors {\n code\n message\n __typename\n    }\n __typename\n  }\n}\n\"}]";
             var data = Encoding.ASCII.GetBytes(postData);
